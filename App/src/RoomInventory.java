@@ -5,19 +5,18 @@ public class RoomInventory {
 
     private Map<String, Integer> availability = new HashMap<>();
 
-    // Constructor
     public RoomInventory() {
         availability.put("Single", 5);
         availability.put("Double", 3);
         availability.put("Suite", 2);
     }
 
-    // ✅ Check availability
+    // Check availability
     public boolean isAvailable(String roomType) {
         return availability.getOrDefault(roomType, 0) > 0;
     }
 
-    // ✅ Reduce room count
+    // Reduce room (booking)
     public void reduceRoom(String roomType) {
         int count = availability.getOrDefault(roomType, 0);
         if (count > 0) {
@@ -25,12 +24,12 @@ public class RoomInventory {
         }
     }
 
-    // ✅ Optional: Increase room (for cancellation use case)
-    public void increaseRoom(String roomType) {
+    // Add room (cancellation) ✅ FIX
+    public void addRoom(String roomType) {
         availability.put(roomType, availability.getOrDefault(roomType, 0) + 1);
     }
 
-    // ✅ Getter
+    // Get availability
     public Map<String, Integer> getAvailability() {
         return availability;
     }
