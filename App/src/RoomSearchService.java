@@ -8,7 +8,8 @@ public class RoomSearchService {
             Room doubleRoom,
             Room suiteRoom) {
 
-        Map<String, Integer> availability = inventory.getRoomAvailability();
+        // ✅ FIXED METHOD HERE
+        Map<String, Integer> availability = inventory.getAvailability();
 
         System.out.println("Room Search\n");
 
@@ -30,7 +31,7 @@ public class RoomSearchService {
         if (availability.get("Suite") > 0) {
             System.out.println("Suite Room:");
             suiteRoom.displayRoomDetails();
-            System.out.println("Available: " + availability.get("Suite"));
+            System.out.println("Available: " + availability.get("Suite") + "\n");
         }
     }
 }

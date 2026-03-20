@@ -1,14 +1,4 @@
-import java.util.*;
-
 public class RoomAllocationService {
-
-    private Set<String> allocatedRoomIds;
-    private Map<String, Set<String>> assignedRoomsByType;
-
-    public RoomAllocationService() {
-        allocatedRoomIds = new HashSet<>();
-        assignedRoomsByType = new HashMap<>();
-    }
 
     public void allocateRoom(Reservation reservation, RoomInventory inventory) {
 
@@ -19,21 +9,12 @@ public class RoomAllocationService {
             return;
         }
 
-        String roomId = generateRoomId(roomType);
-
-        allocatedRoomIds.add(roomId);
-
-        assignedRoomsByType.putIfAbsent(roomType, new HashSet<>());
-        assignedRoomsByType.get(roomType).add(roomId);
-
         inventory.reduceRoom(roomType);
 
-        System.out.println("Booking confirmed for Guest: "
-                + reservation.getGuestName() + ", Room ID: " + roomId);
-    }
+        String roomId = roomType + "-" + (int)(Math.random() * 100);
 
-    private String generateRoomId(String roomType) {
-        int count = assignedRoomsByType.getOrDefault(roomType, new HashSet<>()).size() + 1;
-        return roomType + "-" + count;
+        System.out.println("Booking confirmed for Guest: "
+                + reservation.getGuestName()
+                + ", Room ID: " + roomId);
     }
 }
